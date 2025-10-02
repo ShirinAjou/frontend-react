@@ -15,13 +15,8 @@ function Add() {
     body: JSON.stringify({ title, content }),
     headers: { "Content-Type": "application/json" },
   })
-  .then((res) => res.json())
-  .then((data) => {
-    console.log("Dokument sparat:", data);
-  })
-  .catch((err) => console.error("Fel vid fetch:", err));
-    // .then((res) => console.log(res.json()))
-    // .then((data) => console.log(data));
+    .then((res) => console.log(res.json()))
+    .then((data) => console.log(data));
     setTitle("");
     setContent("");
   };
