@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { useState } from 'react'
+import FETCH_URI from '../utils.js';
 import '../App.css'
 
 function Add() {
@@ -10,12 +11,12 @@ function Add() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch('https://jsramverk-shirin-hsfqftftd8b6d9fn.northeurope-01.azurewebsites.net/add', {
+  fetch(`${FETCH_URI}/add`, {
     method: "POST",
     body: JSON.stringify({ title, content }),
     headers: { "Content-Type": "application/json" },
   })
-    .then((res) => console.log(res.json()))
+    .then((res) => res.json())
     .then((data) => console.log(data));
     setTitle("");
     setContent("");
