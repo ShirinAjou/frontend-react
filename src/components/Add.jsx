@@ -1,6 +1,5 @@
-import { createRoot } from 'react-dom/client'
-import { useState } from 'react'
 import FETCH_URI from '../utils.js';
+import { useState } from 'react'
 import '../App.css'
 
 function Add() {
