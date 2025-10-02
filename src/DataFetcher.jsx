@@ -4,15 +4,15 @@ function FetchData() {
    const [data, setData] = useState(null);
 
    useEffect(() => {
-    fetch('https://github.com/LillaMy-droid/jsramverk.git')
+    fetch('https://jsramverk-shirin-hsfqftftd8b6d9fn.northeurope-01.azurewebsites.net/')
     .then(response => response.json())
     .then(data => setData(data));
+    console.log(data) 
     }, []);
-
     return (
     <div>
         {data && data.map(post => (
-        <div key={post.id}>
+        <div key={post._id}>
             <h2>{post.title}</h2>
             <p>{post.body}</p>
         </div>
