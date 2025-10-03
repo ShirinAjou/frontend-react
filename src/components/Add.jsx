@@ -1,16 +1,18 @@
 import FETCH_URI from '../utils.js';
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../App.css'
 
 function Add() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const navigate = useNavigate();
 
   const onChange = (event) => { setTitle(event.target.value) };
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URI}/add`, {
+  fetch("http://localhost:8080/add", {
     method: "POST",
     body: JSON.stringify({ title, content }),
     headers: { "Content-Type": "application/json" },
@@ -19,14 +21,15 @@ function Add() {
     .then((data) => console.log(data));
     setTitle("");
     setContent("");
+    navigate("/");
   };
 
   return (
     <div>
       <h1>Skapa dokument</h1>
-      <form onSubmit={onSubmit}>
+      <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Titel</label>
-        <input type="text" name="title" value={title} onChange={onChange}/>
+        <input type="text" name="title" value={title} onChange={onChange} required />
 
         <label htmlFor="content">Innehåll</label>
         <textarea name="content" value={content} onChange={onContentChange}>content </textarea>

@@ -18,14 +18,13 @@ function App() {
     <BrowserRouter basename="/frontend-react">
       <nav>
         <Link to="/">Home</Link> |{" "}
-        <Link to="/add">Add</Link> |{" "}
-        <Link to="/edit/1">Edit</Link> |{" "}
+        <Link to="/add">Add</Link>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<Add />} />
-        <Route path="/edit/:id" element={<Edit />} />
+        <Route path="/update/:id" element={<Edit />} />
       </Routes>
     </BrowserRouter>
   );

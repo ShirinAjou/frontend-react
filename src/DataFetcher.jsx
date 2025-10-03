@@ -1,25 +1,39 @@
 import { useState, useEffect } from 'react';
 import FETCH_URI from './utils.js';
+import './App.css'
 
 function FetchData() {
-   const [data, setData] = useState(null);
+   const [data, setData] = useState([]);
 
    useEffect(() => {
-    fetch(`${FETCH_URI}`)
+    fetch("http://localhost:8080")
     .then(response => response.json())
     .then(data => setData(data));
     console.log(data) 
     }, []);
+
     return (
     <div>
-        {data && data.map(post => (
-        <div key={post._id}>
-            <h2>{post.title}</h2>
-            <p>{post.content}</p>
-        </div>
-        ))}
+      <table className="table-container" border="1">
+        <thead>
+          <tr>
+            <th>Titel</th>
+            <th>Åtgärd</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((post) => (
+            <tr key={post._id}>
+              <td>{post.title}</td>
+              <td>
+                <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
-    );
+  );
 }
 
 export default FetchData;
