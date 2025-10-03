@@ -5,11 +5,13 @@ import './App.css'
 function FetchData() {
    const [data, setData] = useState([]);
 
-   useEffect(() => {
+    useEffect(() => {
     fetch("http://localhost:8080")
     .then(response => response.json())
-    .then(data => setData(data));
-    console.log(data) 
+    .then(data => {
+        setData(data);
+        console.log(data);
+    });
     }, []);
 
     return (

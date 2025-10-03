@@ -18,7 +18,7 @@ function Edit() {
     .then((data) => {
       setTitle(data.title);
       setContent(data.content)});
-    }, []);
+    }, [id]);
 
   const onChange = (event) => { setTitle(event.target.value) };
   const onContentChange = (event) => { setContent(event.target.value) };
@@ -44,7 +44,7 @@ function Edit() {
         <input type="text" name="title" value={title} onChange={onChange} required />
 
         <label htmlFor="content">Innehåll</label>
-        <textarea name="content" value={content} onChange={onContentChange}>content </textarea>
+        <textarea name="content" value={content} onChange={onContentChange}></textarea>
 
         <input type="submit" value="Uppdatera dokument"/>
       </form>
