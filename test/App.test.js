@@ -8,7 +8,6 @@
 
 // Testing recipes i react https://legacy.reactjs.org/docs/testing-recipes.html
 
-
 // Nedan 'r exempel från jsramverk.se och inte en test fäår våran kod.
 import { render, screen } from '@testing-library/react';
 import App from './App';
