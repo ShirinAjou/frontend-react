@@ -10,7 +10,7 @@ function Delete() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${FETCH_URI}/delete/${id}`, {
+    fetch(`${FETCH_URI}/update/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -24,9 +24,8 @@ function Delete() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URI}/update`, {
-    method: "POST",
-    body: JSON.stringify({ id, title, content }),
+  fetch(`${FETCH_URI}/delete/${id}`, {
+    method: "DELETE",
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())

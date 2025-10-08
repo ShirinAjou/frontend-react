@@ -31,17 +31,4 @@ describe('example to-do app', () => {
     // https://on.cypress.io/window
     cy.window().should('have.property', 'top')
   })
-
-  it('.submit() - submit a form', () => {
-    // https://on.cypress.io/submit
-    cy.get('.form-container')
-      .find('[type="text"]').type('Dokument skapad')
-
-    cy.get('.form-container').submit()
-  })
-
-  // it('.click() - click on a DOM element', () => {
-  //   // https://on.cypress.io/click
-  //   cy.get('.action-btn').click()
-  // })
 })

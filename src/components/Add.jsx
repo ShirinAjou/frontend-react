@@ -18,7 +18,7 @@ function Add() {
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => data);
     setTitle("");
     setContent("");
     navigate("/");
@@ -34,7 +34,7 @@ function Add() {
         <label htmlFor="content">Innehåll</label>
         <textarea name="content" value={content} onChange={onContentChange}>content </textarea>
 
-        <input type="submit" value="Skapa dokument"/>
+        <input className="btn-container" type="submit" value="Skapa dokument"/>
       </form>
     </div>
   );

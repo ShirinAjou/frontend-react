@@ -3,6 +3,7 @@ import FetchData from '../DataFetcher.jsx'
 import '../App.css'
 import Add from'./Add.jsx'
 import Edit from'./Update.jsx'
+import Delete from'./Delete.jsx'
 
 function Home() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<Add />} />
         <Route path="/update/:id" element={<Edit />} />
+        <Route path="/delete/:id" element={<Delete />} />
       </Routes>
     </BrowserRouter>
   );
