@@ -36,6 +36,6 @@ describe('example to-do app', () => {
     cy.get('.form-container')
     cy.get('.btn-container').click()
     cy.should('be.visible')
-    cy.url().should('include', '/add');
+    cy.url().should('include', '/add')
   })
 })
