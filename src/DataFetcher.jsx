@@ -28,7 +28,6 @@ function FetchData() {
               <td>{post.title}</td>
               <td>
                 <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
-                <a href={`/frontend-react/delete/${post._id}`}>Radera</a>
               </td>
             </tr>
           ))}

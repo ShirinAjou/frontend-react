@@ -29,7 +29,7 @@ function Add() {
       <h1>Skapa dokument</h1>
       <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Titel</label>
-        <input type="text" name="title" value={title} onChange={onChange} required />
+        <input className="action-content" type="text" name="title" value={title} onChange={onChange} required />
 
         <label htmlFor="content">Innehåll</label>
         <textarea name="content" value={content} onChange={onContentChange}>content </textarea>

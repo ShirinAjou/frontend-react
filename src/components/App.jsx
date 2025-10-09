@@ -3,7 +3,6 @@ import FetchData from '../DataFetcher.jsx'
 import '../App.css'
 import Add from'./Add.jsx'
 import Edit from'./Update.jsx'
-import Delete from'./Delete.jsx'
 
 function Home() {
   return (
@@ -17,7 +16,7 @@ function Home() {
 function App() {
   return (
     <BrowserRouter basename="/frontend-react">
-      <nav>
+      <nav className='nav-container'>
         <Link to="/">Home</Link> |{" "}
         <Link to="/add">Add</Link>
       </nav>
@@ -26,7 +25,6 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<Add />} />
         <Route path="/update/:id" element={<Edit />} />
-        <Route path="/delete/:id" element={<Delete />} />
       </Routes>
     </BrowserRouter>
   );
