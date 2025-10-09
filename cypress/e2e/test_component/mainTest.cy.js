@@ -13,7 +13,7 @@ describe('example to-do app', () => {
     cy.window().should('have.property', 'top')
   })
 
-  it('testing page is rendering', () => {
+  it('should render home page', () => {
     cy.visit('http://localhost:5173')
   })
 
@@ -21,11 +21,7 @@ describe('example to-do app', () => {
     cy.get('.nav-container>a').should('contain.text', 'Add') 
   })
 
-  it('XX', () => {
+  it('match root element html', () => {
     cy.root().should('match', 'html')
-  })
-
-  it('XX', () => {
-    cy.get('[data-cy=submit]').click()
   })
 })

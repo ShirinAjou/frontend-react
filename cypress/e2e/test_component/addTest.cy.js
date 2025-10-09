@@ -22,7 +22,6 @@ describe('example to-do app', () => {
     cy.url().should('include', '/frontend-react')
   })
 
-
   it('submit a form without title', () => {
     cy.get('.form-container')
     cy.get('.btn-container').click()
@@ -39,6 +38,19 @@ describe('example to-do app', () => {
     cy.get('.form-container').within(() => {
       cy.get('input[name="title"]').first().should('exist')
       cy.get('textarea[name="content"]').last().should('exist')
+    })
+  })
+
+  it('test submiting form via POST', () => {
+    cy.intercept('POST', '**/add', { statusCode: 200, body: { success: true } }).as('postAdd')
+    cy.get('input[name="title"]').type('Mitt testdokument')
+    cy.get('textarea[name="content"]').type('Innehållet i testdokumentet')
+    cy.get('.btn-container').click()
+
+    cy.wait('@postAdd').should(({ request }) => {
+      expect(request.body).to.have.property('title', 'Mitt testdokument')
+      expect(request.body).to.have.property('content', 'Innehållet i testdokumentet')
+      expect(request.headers).to.have.property('content-type').and.include('application/json')
     })
   })
 })
