@@ -19,14 +19,12 @@ function App() {
       <nav className='nav-container'>
         <Link to="/">Home</Link> |{" "}
         <Link to="/add">Add</Link>
-        <Link to="/editor">Editor</Link>
       </nav>
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<Add />} />
         <Route path="/update/:id" element={<Edit />} />
-        <Route path="/editor/:id" element={<Editor />} />
       </Routes>
     </BrowserRouter>
   );
