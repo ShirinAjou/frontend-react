@@ -1,7 +1,9 @@
+
+import 'whatwg-fetch';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
 import Add from '../src/components/Add';
 
 jest.mock('react-router-dom', () => ({
@@ -24,4 +26,17 @@ test('updates title and content inputs', () => {
 
   expect(titleInput.value).toBe('New Title');
   expect(contentInput.value).toBe('New Content');
+});
+
+test('submits the form with input value', () => {
+  render(
+    <MemoryRouter>
+      <Add />
+    </MemoryRouter>
+  );
+
+  fireEvent.change(screen.getByLabelText("Titel"), { target: { value: "Testar titel-input" } });
+
+  const form = screen.getByTestId('add-form');
+  fireEvent.submit(form);
 });
