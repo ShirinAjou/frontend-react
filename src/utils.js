@@ -3,7 +3,7 @@ if (location.host === "localhost") {
     FETCH_URL = "http://localhost:8080";
 }
 
-let URL_GITHUB = "https://shirinajou.github.io/frontend-react/"
+let URL_GITHUB = "https://shirinajou.github.io/frontend-react"
 if (location.host === "localhost") {
     URL_GITHUB = "http://localhost:5173";
 }
