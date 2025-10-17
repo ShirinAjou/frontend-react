@@ -39,7 +39,7 @@ function Edit() {
         navigate("/");
       }, 2000);
     })
-
+  }
   return (
     <div>
       <h1>Redigera dokument</h1>
@@ -55,6 +55,5 @@ function Edit() {
       </form>
     </div>
   );
-  }
 }
 export default Edit;
