@@ -30,15 +30,15 @@ jobs:
         mongodb-version: ${{ matrix.mongodb-version }}
 
     - name: Start preview server
-        run: npm run preview &
-        env:
-          CI: true
+      run: npm run preview &
+      env:
+        CI: true
       
-     - name: Run Cypress tests
-        uses: cypress-io/github-action@v6
-        with:
-          wait-on: http://localhost:4173/
-          wait-on-timeout: 60
+    - name: Run Cypress tests
+      uses: cypress-io/github-action@v6
+      with:
+        wait-on: http://localhost:4173/
+        wait-on-timeout: 60
 
     - name: Clean install
       run: |
