@@ -1,23 +1,50 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react';
+import FETCH_URL from './utils.js';
+import { io } from "socket.io-client";
+import './App.css'
 
-function MyForm() {
-  const [mytxt, setMytxt] = useState("");
+let socket;
 
-  function handleChange(e) {
-    setMytxt(e.target.value);
+function TextEditor() {
+  const [ title, setTitle] = useState("");
+  const [ content, setContent] = useState("");
+
+  const socket = useRef(null);
+
+  useEffect(() => {
+    socket.current = io(FETCH_URL);
+
+    socket.current.on("content", (data) => {
+      setContent(data);
+    });
+
+    return () => {
+      socket.current.disconnect();
+    }
+  }, []);
+
+  function clear(e) {
+    e.preventDefault();
+    setTitle("");
+    setContent("");
+  }
+  function handleContentChange(e) {
+    const value = e.target.value;
+    socket.current.emit("content", value);
   }
 
   return (
-    <form>
-      <label>Write here:
-        <textarea
-          value={mytxt}
-          onChange={handleChange}
-        />
-      </label>
-      <p>Current value: {mytxt}</p>
-    </form>
-  )
-}
+    <>
+      <label htmlFor="title-field">Title</label>
+      <input type="text" id="title-field" name="title-field" value={title} 
+      onChange={(e) => setTitle(e.target.value)} />
 
-export default MyForm
+      <label htmlFor="contetnt-field">Content</label>
+      <input type="text" id="contetnt-field" value={content} 
+      onChange={handleContentChange}></input> />
+
+    </>
+  )
+};
+
+export default TextEditor;
