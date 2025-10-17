@@ -11,7 +11,7 @@ function Edit() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${FETCH_URI}/update/${id}`, {
+    fetch(`${FETCH_URL}/update/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -25,7 +25,7 @@ function Edit() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URI}/update`, {
+  fetch(`${FETCH_URL}/update`, {
     method: "POST",
     body: JSON.stringify({ id, title, content }),
     headers: { "Content-Type": "application/json" },
