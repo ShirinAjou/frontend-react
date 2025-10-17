@@ -7,6 +7,7 @@ function Edit() {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -36,7 +37,6 @@ function Edit() {
       navigate("/");
     });
   };
-  
   return (
     <div>
       <h1>Redigera dokument</h1>
