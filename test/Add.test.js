@@ -6,10 +6,18 @@ import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import Add from '../src/components/Add';
 
+const mockNavigate = jest.fn();
+
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
+  useNavigate: () => mockNavigate,
 }));
+
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({}),
+  })
+);
 
 test('updates title and content inputs', () => {
   render(
@@ -39,4 +47,23 @@ test('submits the form with input value', () => {
 
   const form = screen.getByTestId('add-form');
   fireEvent.submit(form);
+});
+
+test('submit the form an navigate to homepage', () => {
+  render(
+    <MemoryRouter>
+      <Add />
+    </MemoryRouter>
+  );
+
+  const titleInput = screen.getByLabelText(/titel/i);
+  const contentInput = screen.getByLabelText(/innehåll/i);
+
+  fireEvent.change(titleInput, { target: { value: 'New Title' } });
+  fireEvent.change(contentInput, { target: { value: 'New Content' } });
+
+  const form = screen.getByTestId('add-form');
+  fireEvent.submit(form);
+  
+  expect(mockNavigate).toHaveBeenCalledWith('/')
 });

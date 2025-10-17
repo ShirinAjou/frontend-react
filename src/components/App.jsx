@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import FetchData from '../DataFetcher.jsx'
 import Add from'./Add.jsx'
 import Edit from'./Update.jsx'
+import React from 'react';
 import '../App.css'
 
 function Home() {
@@ -30,4 +31,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

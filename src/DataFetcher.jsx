@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import FETCH_URL from './utils.js';
+import React from 'react';
 import './App.css'
 
 function FetchData() {
