@@ -32,14 +32,18 @@ function Edit() {
   })
     .then((res) => res.json())
     .then((data) => {
+      setMessage("Dokumentet har uppdaterats")
       setTitle("");
       setContent("");
-      navigate("/");
-    });
-  };
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    })
+  }
   return (
     <div>
       <h1>Redigera dokument</h1>
+      {message && <p className="confirmation">{message}</p>}
       <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Titel</label>
         <input type="text" name="title" value={title} onChange={onChange} required />
