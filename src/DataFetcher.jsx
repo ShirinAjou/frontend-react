@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import FETCH_URI from './utils.js';
+import { Link } from "react-router-dom";
+import FETCH_URL from './utils.js';
 import './App.css'
 
 function FetchData() {
    const [data, setData] = useState([]);
 
     useEffect(() => {
-    fetch(FETCH_URI)
+    fetch(FETCH_URL)
     .then(response => response.json())
     .then(data => {
         setData(data);
@@ -27,7 +28,7 @@ function FetchData() {
             <tr key={post._id}>
               <td>{post.title}</td>
               <td>
-                <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
+                <Link to={`/update/${post._id}`}>Uppdatera</Link>
               </td>
             </tr>
           ))}

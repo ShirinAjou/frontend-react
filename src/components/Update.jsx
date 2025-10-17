@@ -1,4 +1,4 @@
-import FETCH_URI from '../utils.js';
+import FETCH_URL from '../utils.js';
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router";
 import '../App.css'
@@ -10,7 +10,7 @@ function Edit() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${FETCH_URI}/update/${id}`, {
+    fetch(`${FETCH_URL}/update/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })

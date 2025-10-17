@@ -1,32 +1,36 @@
-import { useState, useEffect } from 'react';
-import FETCH_URI from './utils.js';
+import { useState, useEffect, useRef } from 'react';
+import FETCH_URL from './utils.js';
 import { io } from "socket.io-client";
 import './App.css'
 
 let socket;
 
-function Client() {
-    useEffect(() => {
-      socket = io(FETCH_URI);
+function TextEditor() {
+  const [ title, setTitle] = useState("");
+  const [ content, setContent] = useState("");
 
-      return () => {
-        socket.disconnect();
-      }
-    }, [selectedDoc]);
-}
+  const socket = useRef(null);
 
-socket.emit("create", docs["_id"]);
+  useEffect(() => {
+    socket.current = io(FETCH_URL);
 
-socket.on("doc", (data) => {
-    setEditorContent(data.html, false);
-});
+    socket.current.on("content", (data) => {
+      setContent(data);
+    });
 
-let data = {
-    _id: "LÅNG OCH SLUMPAT",
-    html: "Texten i html format från editorn"
+    return () => {
+      socket.current.disconnest();
+    }
+  }, []);
+
+  function clear(e) {
+    e.preventDefault();
+
+    setTitle("");
+    setContent("");
+  }
+
+  
 };
 
-socket.emit("doc", data);
-
-
-export default Client;
+export default TextEditor;

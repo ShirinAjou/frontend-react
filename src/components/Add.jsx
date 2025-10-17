@@ -1,4 +1,4 @@
-import FETCH_URI from '../utils.js';
+import FETCH_URL from '../utils.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
@@ -12,7 +12,7 @@ function Add() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URI}/add`, {
+  fetch(`${FETCH_URL}/add`, {
     method: "POST",
     body: JSON.stringify({ title, content }),
     headers: { "Content-Type": "application/json" },
