@@ -2,7 +2,7 @@
 
 describe('example to-do app', () => {
   beforeEach(() => {
-    cy.visit('https://shirinajou.github.io/frontend-react/')
+    cy.visit('http://localhost:5173')
   })
 
   it('displays two todo items by default', () => {
@@ -14,7 +14,7 @@ describe('example to-do app', () => {
   })
 
   it('should render home page', () => {
-    cy.visit('https://shirinajou.github.io/frontend-react/')
+    cy.visit('http://localhost:5173')
   })
 
   it('testing navigation', () => {

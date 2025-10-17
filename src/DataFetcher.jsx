@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import FETCH_URL from './utils.js';
 import './App.css'
 
@@ -28,7 +27,7 @@ function FetchData() {
             <tr key={post._id}>
               <td>{post.title}</td>
               <td>
-                <Link to={`/update/${post._id}`}>Uppdatera</Link>
+                <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
               </td>
             </tr>
           ))}

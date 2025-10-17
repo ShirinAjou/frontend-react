@@ -2,7 +2,7 @@
 
 describe('example to-do app', () => {
   beforeEach(() => {
-    cy.visit('https://shirinajou.github.io/frontend-react/')
+    cy.visit('http://localhost:5173')
   })
 
   it('displays two todo items by default', () => {
@@ -11,7 +11,7 @@ describe('example to-do app', () => {
 
   it('test fetch request', () => {
     cy.intercept('GET', "https://jsramverk-shirin-hsfqftftd8b6d9fn.northeurope-01.azurewebsites.net/", { fixture: 'mockData.json' })
-    cy.visit('https://shirinajou.github.io/frontend-react/')
+    cy.visit('http://localhost:5173')
     cy.get('table').should('contain', 'Document1')
   })
 

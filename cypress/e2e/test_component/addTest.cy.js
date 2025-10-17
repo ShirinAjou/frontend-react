@@ -2,7 +2,7 @@
 
 describe('example to-do app', () => {
   beforeEach(() => {
-    cy.visit('https://shirinajou.github.io/frontend-react/add')
+    cy.visit('http://localhost:5173/frontend-react/add')
   })
 
   it('test h1 text content', () => {

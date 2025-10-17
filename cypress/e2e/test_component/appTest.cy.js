@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
 describe('example to-do app', () => {
-    const baseUrl = 'https://shirinajou.github.io/frontend-react/';
+    const baseUrl = 'http://localhost:5173/frontend-react/';
     beforeEach(() => {
-        cy.visit('https://shirinajou.github.io/frontend-react/')
+        cy.visit('http://localhost:5173/frontend-react/')
     })
 
     it('testing navigation', () => {
