@@ -19,18 +19,25 @@ function TextEditor() {
     });
 
     return () => {
-      socket.current.disconnest();
+      socket.current.disconnect();
     }
   }, []);
 
   function clear(e) {
     e.preventDefault();
-
     setTitle("");
     setContent("");
   }
+  function handleContentChange(e) {
+    const value = e.target.value;
+    socket.current.emit("content", value);
+  }
 
-  
+  // return (
+  //     // <label htmlFor="title-field">Title</label>
+  //     // <input type="text" id="title-field" name="title-field" value={title}
+  //     // onChange={(e) => setTitle(e.target.value)} />
+  // )
 };
 
 export default TextEditor;

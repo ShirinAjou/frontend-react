@@ -7,10 +7,11 @@ function Edit() {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${FETCH_URL}/update/${id}`, {
+    fetch(`${FETCH_URI}/update/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -30,15 +31,19 @@ function Edit() {
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
-    .then((data) => (data));
-    setTitle("");
-    setContent("");
-    navigate("/");
-  };
+    .then((data) => {
+      setMessage("Dokumentet har uppdaterats")
+      setTitle("");
+      setContent("");
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
+    })
 
   return (
     <div>
       <h1>Redigera dokument</h1>
+      {message && <p className="confirmation">{message}</p>}
       <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Titel</label>
         <input type="text" name="title" value={title} onChange={onChange} required />
@@ -50,6 +55,6 @@ function Edit() {
       </form>
     </div>
   );
+  }
 }
-
-export default Edit
+export default Edit;
