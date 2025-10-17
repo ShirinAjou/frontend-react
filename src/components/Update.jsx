@@ -7,7 +7,6 @@ function Edit() {
   const { id } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {

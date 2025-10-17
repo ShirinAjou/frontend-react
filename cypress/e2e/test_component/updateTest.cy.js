@@ -2,7 +2,7 @@
 
 describe('Update-komponenten', () => {
   const id = '123';
-  const baseUrl = 'http://localhost:5173/frontend-react';
+  const baseUrl = 'https://shirinajou.github.io/frontend-react';
   beforeEach(() => {
     cy.intercept('GET', `/update/${id}`, {
       statusCode: 200,
@@ -19,7 +19,7 @@ describe('Update-komponenten', () => {
         content: 'Nytt innehåll' }
     }).as('postUpdate');
 
-    cy.visit(`http://localhost:5173/frontend-react/update/${id}`);  
+    cy.visit(`https://shirinajou.github.io/frontend-react/update/${id}`);  
   });
 
   it('visar befintlig titel och innehåll', () => {
