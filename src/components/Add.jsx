@@ -1,4 +1,5 @@
 import FETCH_URL from '../utils.js';
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
@@ -29,10 +30,10 @@ function Add() {
       <h1>Skapa dokument</h1>
       <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Titel</label>
-        <input className="action-content" type="text" name="title" value={title} onChange={onChange} required />
+        <input id="title" className="action-content" type="text" name="title" value={title} onChange={onChange} required />
 
         <label htmlFor="content">Innehåll</label>
-        <textarea name="content" value={content} onChange={onContentChange}>content </textarea>
+        <textarea id="content" name="content" value={content} onChange={onContentChange}></textarea>
 
         <input className="btn-container" type="submit" value="Skapa dokument"/>
       </form>
