@@ -16,7 +16,7 @@ function Home() {
 
 function App() {
   return (
-    <BrowserRouter basename="/frontend-react">
+    <>
       <nav className='nav-container'>
         <Link to="/">Home</Link> |{" "}
         <Link to="/add">Add</Link>
@@ -27,7 +27,7 @@ function App() {
         <Route path="/add" element={<Add />} />
         <Route path="/update/:id" element={<Edit />} />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 
