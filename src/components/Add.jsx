@@ -1,4 +1,5 @@
-import FETCH_URI from '../utils.js';
+import FETCH_URL from '../utils.js';
+import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css'
@@ -12,7 +13,7 @@ function Add() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URI}/add`, {
+  fetch(`${FETCH_URL}/add`, {
     method: "POST",
     body: JSON.stringify({ title, content }),
     headers: { "Content-Type": "application/json" },
@@ -27,12 +28,12 @@ function Add() {
   return (
     <div>
       <h1>Skapa dokument</h1>
-      <form className="form-container" onSubmit={onSubmit}>
+      <form className="form-container" onSubmit={onSubmit} data-testid="add-form">
         <label htmlFor="title">Titel</label>
-        <input className="action-content" type="text" name="title" value={title} onChange={onChange} required />
+        <input id="title" className="action-content" type="text" name="title" value={title} onChange={onChange} required />
 
         <label htmlFor="content">Innehåll</label>
-        <textarea name="content" value={content} onChange={onContentChange}>content </textarea>
+        <textarea id="content" name="content" value={content} onChange={onContentChange}></textarea>
 
         <input className="btn-container" type="submit" value="Skapa dokument"/>
       </form>

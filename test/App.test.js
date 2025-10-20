@@ -1,19 +1,31 @@
-// kopierat text från jsramverk.se. Ska tas bbort när testning klar/påbörjad. Inlagd för mitt eget minne
+import 'whatwg-fetch';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import '@testing-library/jest-dom';
+import React from 'react';
+import App, { Home } from '../src/components/App';
+import FetchData from '../src/DataFetcher'; 
 
-// Testerna för en komponent till exempel App.js skrivs i filen App.test.js.
+const mockNavigate = jest.fn();
 
-// Ett test för att kolla om en rubrik finns i den renderade appen görs på följande sätt.
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
 
-// testverktyget i react https://legacy.reactjs.org/docs/testing.html
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve({}),
+  })
+);
 
-// Testing recipes i react https://legacy.reactjs.org/docs/testing-recipes.html
+test('renders Add component at "/add" route', () => {
+  render(
+    <MemoryRouter initialEntries={['/add']}>
+      <App />
+    </MemoryRouter>
+  );
 
-// Nedan 'r exempel från jsramverk.se och inte en test fäår våran kod.
-import { render, screen } from '@testing-library/react';
-import App from './App';
-
-test('renders ', () => {
-  const { container } = render(<App />);
-
-  expect(screen.getByText(/folinodocs/i)).toBeInTheDocument();
+  expect(screen.getByText(/add/i)).toBeInTheDocument();
 });

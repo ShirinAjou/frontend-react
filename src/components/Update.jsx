@@ -1,6 +1,7 @@
-import FETCH_URI from '../utils.js';
+import FETCH_URL from '../utils.js';
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from "react-router";
+import React from 'react';
 import '../App.css'
 
 function Edit() {
@@ -10,7 +11,7 @@ function Edit() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${FETCH_URI}/update/${id}`, {
+    fetch(`${FETCH_URL}/update/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -24,18 +25,19 @@ function Edit() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URI}/update`, {
+  fetch(`${FETCH_URL}/update`, {
     method: "POST",
     body: JSON.stringify({ id, title, content }),
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
-    .then((data) => (data));
-    setTitle("");
-    setContent("");
-    navigate("/");
+    .then((data) => {
+      setTitle("");
+      setContent("");
+      navigate("/");
+    });
   };
-
+  
   return (
     <div>
       <h1>Redigera dokument</h1>
@@ -51,5 +53,4 @@ function Edit() {
     </div>
   );
 }
-
-export default Edit
+export default Edit;

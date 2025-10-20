@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
-import FETCH_URI from './utils.js';
+import FETCH_URL from './utils.js';
+import React from 'react';
 import './App.css'
 
 function FetchData() {
    const [data, setData] = useState([]);
 
     useEffect(() => {
-    fetch(FETCH_URI)
+    fetch(FETCH_URL)
     .then(response => response.json())
     .then(data => {
         setData(data);
@@ -28,6 +29,7 @@ function FetchData() {
               <td>{post.title}</td>
               <td>
                 <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
+                <a href={`/frontend-react/texteditor/${post._id}`}>Kommentera</a>
               </td>
             </tr>
           ))}
