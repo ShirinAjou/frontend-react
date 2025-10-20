@@ -12,6 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@uiw/react-codemirror": "^4.25.2",
+    "codemirror": "^6.0.2",
     "jest": "^30.2.0",
     "node-fetch": "^2.7.0",
     "react": "^19.1.1",

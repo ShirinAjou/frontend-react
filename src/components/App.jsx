@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import FetchData from '../DataFetcher.jsx'
 import Add from'./Add.jsx'
 import Edit from'./Update.jsx'
+import TextEditor from'./TextEditor.jsx'
 import React from 'react';
 import '../App.css'
 
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<Add />} />
         <Route path="/update/:id" element={<Edit />} />
+        <Route path="/texteditor/:id" element={<TextEditor />} />
       </Routes>
     </>
   );
