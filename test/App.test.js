@@ -1,11 +1,11 @@
-
 import 'whatwg-fetch';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import '@testing-library/jest-dom';
 import React from 'react';
-import App from '../src/components/App';
+import App, { Home } from '../src/components/App';
+import FetchData from '../src/DataFetcher'; 
 
 const mockNavigate = jest.fn();
 
@@ -29,4 +29,3 @@ test('renders Add component at "/add" route', () => {
 
   expect(screen.getByText(/add/i)).toBeInTheDocument();
 });
-
