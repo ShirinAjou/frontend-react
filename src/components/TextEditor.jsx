@@ -16,7 +16,7 @@ function TextEditor() {
     socket.current = io(FETCH_URL, {
       transports: ["polling"]
     });
-    fetch(`${FETCH_URL}/${id}`)
+    fetch(`http://localhost:8080/texteditor/${id}`)
     .then(res => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     return res.json();
