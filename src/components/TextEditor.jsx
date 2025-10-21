@@ -5,6 +5,12 @@ import { io } from "socket.io-client";
 import CodeMirror from '@uiw/react-codemirror';
 import '../App.css'
 
+
+// 1. Add a code editor to your project, like CodeMirror or Monaco Editor. fixat
+// 2. Allow users to choose between a regular document and a code document. fixat
+// 3. Save the document type in your database. 
+// 4. Create a button to execute code by sending it to an endpoint.
+
 function TextEditor() {
   const { id } = useParams();
   const [ title, setTitle] = useState("");
@@ -13,36 +19,31 @@ function TextEditor() {
   const socket = useRef(null);
 
   useEffect(() => {
-    socket.current = io(FETCH_URL, {
-      transports: ["polling"]
-    });
-    fetch(`http://localhost:8080/texteditor/${id}`)
-    .then(res => {
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-    return res.json();
-  })
-  .then(data => {
-    setTitle(data.title || "");
-    setContent(data.content || "");
-    socket.current.emit("create", data._id);
-    socket.current.emit("doc", data);
-  })
-  .catch(err => {
-    console.error("Fetch error:", err);
-    // optionally show error in UI
-  });
-    socket.current.on("doc", (data) => {
-      setContent(data.content, false);
-    });
-    
-    socket.current.on("content", (data) => {
-      setContent(data);
+    socket.current = io("http://localhost:8080");
+    fetch(`http://localhost:8080/texteditor/${id}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+    .then((res) => res.json())
+    .then((data) => {
+      setTitle(data.title);
+      setContent(data.content);
+      socket.current.emit("create", data._id);
+      socket.current.emit("doc", data);
     });
 
-    return () => {
-      socket.current.disconnect();
-    }
-  }, [id]);
+  socket.current.on("doc", (data) => {
+    setContent(data.content, false);
+  });
+    
+  socket.current.on("content", (data) => {
+    setContent(data);
+  });
+
+  return () => {
+    socket.current.disconnect();
+  }
+}, [id]);
 
   function clear(e) {
     e.preventDefault();
@@ -59,6 +60,27 @@ function TextEditor() {
   function handleContentChangeMirror(e) {
     setContent(e)
     socket.current.emit("content", e);
+  }
+
+  function saveData() {
+    fetch("https://execjs.emilfolino.se/code", {
+      body: JSON.stringify({
+      id,
+      title,
+      content,
+      }),
+      headers: {
+          'content-type': 'application/json'
+      },
+      method: 'POST'
+    })
+    .then(function (response) {
+        return response.json();
+    })
+    .then(function(result) {
+        let decodedOutput = atob(result.data);
+        console.log(decodedOutput);
+    });
   }
 
   return (
@@ -79,6 +101,8 @@ function TextEditor() {
         </label>
 
         <button id="print-message" onClick={clear}>Clear</button>
+
+        <button onClick={saveData}>Save</button>
 
         <div id="output-container">
           <h1>{title}</h1>
