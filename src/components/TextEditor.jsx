@@ -13,19 +13,24 @@ function TextEditor() {
   const socket = useRef(null);
 
   useEffect(() => {
-    socket.current = io("http://localhost:8080");
-    fetch(`http://localhost:8080/texteditor/${id}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      setTitle(data.title || "");
-      setContent(data.content || "");
-      socket.current.emit("create", data._id);
-      socket.current.emit("doc", data);
+    socket.current = io(FETCH_URL, {
+      transports: ["polling"]
     });
-
+    fetch(`${FETCH_URL}/${id}`)
+    .then(res => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+    return res.json();
+  })
+  .then(data => {
+    setTitle(data.title || "");
+    setContent(data.content || "");
+    socket.current.emit("create", data._id);
+    socket.current.emit("doc", data);
+  })
+  .catch(err => {
+    console.error("Fetch error:", err);
+    // optionally show error in UI
+  });
     socket.current.on("doc", (data) => {
       setContent(data.content, false);
     });

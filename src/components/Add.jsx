@@ -13,7 +13,7 @@ function Add() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URL}/add`, {
+  fetch(`http://localhost:8080/add`, {
     method: "POST",
     body: JSON.stringify({ title, content }),
     headers: { "Content-Type": "application/json" },
