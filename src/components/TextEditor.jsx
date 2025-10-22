@@ -5,17 +5,12 @@ import { io } from "socket.io-client";
 import CodeMirror from '@uiw/react-codemirror';
 import '../App.css'
 
-
-// 1. Add a code editor to your project, like CodeMirror or Monaco Editor. fixat
-// 2. Allow users to choose between a regular document and a code document. fixat
-// 3. Save the document type in your database. 
-// 4. Create a button to execute code by sending it to an endpoint.
-
 function TextEditor() {
   const { id } = useParams();
   const [ title, setTitle] = useState("");
   const [ content, setContent] = useState("");
   const [isCodeMode, setIsCodeMode] = useState(false);
+  const [output, setOutput] = useState("");
   const socket = useRef(null);
 
   useEffect(() => {
@@ -63,27 +58,51 @@ function TextEditor() {
   }
 
   function saveData() {
-    let encode = { code: btoa(content) }
-    fetch("https://execjs.emilfolino.se/code", {    
-      // body: JSON.stringify({
-      //   id,
-      //   title,
-      //   content,
-      // }),
-      body: JSON.stringify(
-        encode
-      ),
+    fetch(`${FETCH_URL}/update`, {
+      method: "POST",
       headers: {
-          'content-type': 'application/json'
+        "Content-Type": "application/json"
       },
-      method: 'POST'
+      body: JSON.stringify({
+        id,
+        title,
+        content
+      })
     })
-    .then(function (response) {
-        return response.json();
+    .then(res => res.json())
+    .then(result => {
+      console.log("Dokument sparat:", result);
     })
-    .then(function(result) {
-        let decodedOutput = atob(result.data);
-        console.log('result' + decodedOutput);
+    .catch(err => {
+      console.error("Fel vid sparning:", err);
+    });
+  }
+
+  function runCode() {
+    const data = btoa(content);
+
+    fetch("https://execjs.emilfolino.se/code", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        code: data
+      })
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Serverfel: ${res.status}`);
+      }
+      return res.json();
+    })
+    .then(result => {
+      const decodedOutput = atob(result.data);
+      setOutput(decodedOutput);
+    })
+    .catch(err => {
+      console.error("Fel vid exekvering:", err);
+      setOutput("Fel vid exekvering: " + err.message);
     });
   }
 
@@ -99,7 +118,6 @@ function TextEditor() {
         {isCodeMode ? <CodeMirror value={content} onChange={handleContentChangeMirror} className="codemirror"/> : <textarea id="content-field" value={content} 
         onChange={handleContentChange}></textarea>}
 
-
         <div className="switch-container">
           <span className="switch-label">Switch to code-mode</span>
           <label className="switch">
@@ -108,14 +126,17 @@ function TextEditor() {
           </label>
         </div>
 
-
         <button className="button" id="print-message" onClick={clear}>Clear</button>
-
+        <button className="button" onClick={runCode}>Run code</button>
         <button className="button"  onClick={saveData}>Save</button>
 
         <div className="output" id="output-container">
           <h1>{title}</h1>
-          <p>{content}</p>
+            <CodeMirror
+                value={output}
+                editable={false}
+                className="codemirror output"
+              />
         </div>
       </div>
     </>

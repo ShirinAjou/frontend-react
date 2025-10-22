@@ -7,7 +7,7 @@ function FetchData() {
    const [data, setData] = useState([]);
 
     useEffect(() => {
-    fetch(`${FETCH_URL}`)
+    fetch(`${FETCH_URL}/`)
     .then(response => response.json())
     .then(data => {
       console.log(data)
@@ -29,8 +29,8 @@ function FetchData() {
             <tr key={post._id}>
               <td>{post.title}</td>
               <td>
-                <Link to={`/update/${post._id}`}>Uppdatera</Link>
-                <Link to={`/texteditor/${post._id}`}>CodeMirror</Link>
+                <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
+                <a href={`/frontend-react/texteditor/${post._id}`}>CodeMirror</a>
               </td>
             </tr>
           ))}
