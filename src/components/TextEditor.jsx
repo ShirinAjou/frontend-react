@@ -80,7 +80,6 @@ function TextEditor() {
 
   function runCode() {
     const data = btoa(content);
-
     fetch("https://execjs.emilfolino.se/code", {
       method: "POST",
       headers: {
