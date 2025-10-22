@@ -9,7 +9,10 @@
     "build": "vite build",
     "lint": "eslint .",
     "lint --fix": "eslint . --fix",
-    "test": "jest"
+    "test": "jest",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+
   },
   "dependencies": {
     "@uiw/react-codemirror": "^4.25.2",
