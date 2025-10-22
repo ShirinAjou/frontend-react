@@ -29,8 +29,8 @@ function FetchData() {
             <tr key={post._id}>
               <td>{post.title}</td>
               <td>
-                <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
-                <a href={`/frontend-react/texteditor/${post._id}`}>CodeMirror</a>
+                <Link to={`/update/${post._id}`}>Uppdatera</Link>
+                <Link to={`/texteditor/${post._id}`}>CodeMirror</Link>
               </td>
             </tr>
           ))}
