@@ -19,8 +19,8 @@ function TextEditor() {
   const socket = useRef(null);
 
   useEffect(() => {
-    socket.current = io("http://localhost:8080");
-    fetch(`http://localhost:8080/texteditor/${id}`, {
+    socket.current = io(FETCH_URL);
+    fetch(`${FETCH_URL}/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -63,12 +63,16 @@ function TextEditor() {
   }
 
   function saveData() {
-    fetch("https://execjs.emilfolino.se/code", {
-      body: JSON.stringify({
-      id,
-      title,
-      content,
-      }),
+    let encode = { code: btoa(content) }
+    fetch("https://execjs.emilfolino.se/code", {    
+      // body: JSON.stringify({
+      //   id,
+      //   title,
+      //   content,
+      // }),
+      body: JSON.stringify(
+        encode
+      ),
       headers: {
           'content-type': 'application/json'
       },
@@ -79,7 +83,7 @@ function TextEditor() {
     })
     .then(function(result) {
         let decodedOutput = atob(result.data);
-        console.log(decodedOutput);
+        console.log('result' + decodedOutput);
     });
   }
 
@@ -92,19 +96,24 @@ function TextEditor() {
 
         <label htmlFor="content-field">Content</label>
 
-        {isCodeMode ? <CodeMirror value={content} onChange={handleContentChangeMirror} /> : <textarea id="content-field" value={content} 
+        {isCodeMode ? <CodeMirror value={content} onChange={handleContentChangeMirror} className="codemirror"/> : <textarea id="content-field" value={content} 
         onChange={handleContentChange}></textarea>}
 
-        <label className="switch">
-          <input type="checkbox" onChange={(e) => setIsCodeMode(e.target.checked)} />
-          <span className="slider round"></span>
-        </label>
 
-        <button id="print-message" onClick={clear}>Clear</button>
+        <div className="switch-container">
+          <span className="switch-label">Switch to code-mode</span>
+          <label className="switch">
+            <input type="checkbox" onChange={(e) => setIsCodeMode(e.target.checked)} />
+            <span className="slider round"></span>
+          </label>
+        </div>
 
-        <button onClick={saveData}>Save</button>
 
-        <div id="output-container">
+        <button className="button" id="print-message" onClick={clear}>Clear</button>
+
+        <button className="button"  onClick={saveData}>Save</button>
+
+        <div className="output" id="output-container">
           <h1>{title}</h1>
           <p>{content}</p>
         </div>

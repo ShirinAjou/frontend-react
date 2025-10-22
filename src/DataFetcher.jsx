@@ -30,7 +30,7 @@ function FetchData() {
               <td>{post.title}</td>
               <td>
                 <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
-                <a href={`/frontend-react/texteditor/${post._id}`}>Kommentera</a>
+                <a href={`/frontend-react/texteditor/${post._id}`}>CodeMirror</a>
               </td>
             </tr>
           ))}
