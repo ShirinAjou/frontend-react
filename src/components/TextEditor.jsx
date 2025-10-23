@@ -58,8 +58,8 @@ function TextEditor() {
   }
 
   function saveData() {
-    fetch(`${FETCH_URL}/update`, {
-      method: "POST",
+    fetch(`${FETCH_URL}/update/${id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },

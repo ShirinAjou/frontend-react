@@ -25,13 +25,13 @@ function Edit() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URL}/update`, {
-    method: "POST",
-    body: JSON.stringify({ id, title, content }),
+  fetch(`${FETCH_URL}/update/${id}`, {
+    method: "PUT",
     headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ title, content }),
   })
     .then((res) => res.json())
-    .then((data) => {
+    .then(() => {
       setTitle("");
       setContent("");
       navigate("/");

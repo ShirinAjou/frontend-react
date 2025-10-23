@@ -12,6 +12,7 @@ function FetchData() {
     .then(response => response.json())
     .then(data => {
         setData(data);
+        console.log("Fetched data:", data);
     });
     }, []);
 
