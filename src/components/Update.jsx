@@ -40,15 +40,15 @@ function Edit() {
   
   return (
     <div>
-      <h1>Redigera dokument</h1>
+      <h1>Edit document</h1>
       <form className="form-container" onSubmit={onSubmit}>
-        <label htmlFor="title">Titel</label>
+        <label htmlFor="title">Title</label>
         <input type="text" name="title" value={title} onChange={onChange} required />
 
-        <label htmlFor="content">Innehåll</label>
+        <label htmlFor="content">Content</label>
         <textarea name="content" value={content} onChange={onContentChange}></textarea>
 
-        <input type="submit" value="Uppdatera dokument"/>
+        <input type="submit" value="Update document"/>
       </form>
     </div>
   );

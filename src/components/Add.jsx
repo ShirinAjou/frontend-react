@@ -27,15 +27,15 @@ function Add() {
 
   return (
     <div>
-      <h1>Skapa dokument</h1>
+      <h1>Create document</h1>
       <form className="form-container" onSubmit={onSubmit} data-testid="add-form">
-        <label htmlFor="title">Titel</label>
+        <label htmlFor="title">Title</label>
         <input id="title" className="action-content" type="text" name="title" value={title} onChange={onChange} required />
 
-        <label htmlFor="content">Innehåll</label>
+        <label htmlFor="content">Content</label>
         <textarea id="content" name="content" value={content} onChange={onContentChange}></textarea>
 
-        <input className="btn-container" type="submit" value="Skapa dokument"/>
+        <input className="btn-container" type="submit" value="Create document"/>
       </form>
     </div>
   );

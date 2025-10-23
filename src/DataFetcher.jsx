@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import FETCH_URL from './utils.js';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import './App.css'
 
@@ -20,7 +21,7 @@ function FetchData() {
         <thead>
           <tr>
             <th>Titel</th>
-            <th>Åtgärd</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -28,8 +29,10 @@ function FetchData() {
             <tr key={post._id}>
               <td>{post.title}</td>
               <td>
-                <a href={`/frontend-react/update/${post._id}`}>Uppdatera</a>
-                <a href={`/frontend-react/texteditor/${post._id}`}>CodeMirror</a>
+                <Link to={`/update/${post._id}`}>Update</Link>
+                <Link to={`/texteditor/${post._id}`}>CodeMirror</Link>
+                {/* <a href={`/frontend-react/update/${post._id}`}>Update</a>
+                <a href={`/frontend-react/texteditor/${post._id}`}>CodeMirror</a> */}
               </td>
             </tr>
           ))}
