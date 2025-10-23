@@ -3,8 +3,6 @@ import FetchData from '../DataFetcher.jsx'
 import Add from'./Add.jsx'
 import Edit from'./Update.jsx'
 import TextEditor from'./TextEditor.jsx'
-import Login from'./Login.jsx'
-import Register from'./Register.jsx'
 import React from 'react';
 import '../App.css'
 
@@ -22,9 +20,7 @@ function App() {
     <>
       <nav className='nav-container'>
         <Link to="/">Home</Link> |{" "}
-        <Link to="/add">Add</Link> |{" "}
-        <Link to="/login">Login</Link> |{" "}
-        <Link to="/register">Register</Link>
+        <Link to="/add">Add</Link>
       </nav>
 
       <Routes>
@@ -32,8 +28,6 @@ function App() {
         <Route path="/add" element={<Add />} />
         <Route path="/update/:id" element={<Edit />} />
         <Route path="/texteditor/:id" element={<TextEditor />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
       </Routes>
     </>
   );
