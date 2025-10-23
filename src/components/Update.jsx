@@ -31,7 +31,8 @@ function Edit() {
     body: JSON.stringify({ title, content }),
   })
     .then((res) => res.json())
-    .then(() => {
+    .then(data => {
+      console.log("Update response from backend:", data);
       setTitle("");
       setContent("");
       navigate("/");
