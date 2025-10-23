@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import FETCH_URL from '../utils.js';
-import { io } from "socket.io-client";
 import CodeMirror from '@uiw/react-codemirror';
 import '../App.css'
 
@@ -11,11 +10,9 @@ function TextEditor() {
   const [ content, setContent] = useState("");
   const [isCodeMode, setIsCodeMode] = useState(false);
   const [output, setOutput] = useState("");
-  const socket = useRef(null);
 
   useEffect(() => {
-    socket.current = io(FETCH_URL);
-    fetch(`${FETCH_URL}/texteditor/${id}`, {
+    fetch(`http://localhost:8080/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -23,22 +20,8 @@ function TextEditor() {
     .then((data) => {
       setTitle(data.title);
       setContent(data.content);
-      socket.current.emit("create", data._id);
-      socket.current.emit("doc", data);
     });
-
-  socket.current.on("doc", (data) => {
-    setContent(data.content, false);
-  });
-    
-  socket.current.on("content", (data) => {
-    setContent(data);
-  });
-
-  return () => {
-    socket.current.disconnect();
-  }
-}, [id]);
+  }, [id]);
 
   function clear(e) {
     e.preventDefault();
@@ -48,23 +31,20 @@ function TextEditor() {
 
   function handleContentChange(e) {
     const value = e.target.value;
-    setContent(value)
-    socket.current.emit("content", value);
+    setContent(value);
   }
 
-  function handleContentChangeMirror(e) {
-    setContent(e)
-    socket.current.emit("content", e);
+  function handleContentChangeMirror(value) {
+    setContent(value);
   }
 
   function saveData() {
-    fetch(`${FETCH_URL}/update/${id}`, {
+    fetch(`http://localhost:8080/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        id,
         title,
         content
       })
@@ -80,6 +60,7 @@ function TextEditor() {
 
   function runCode() {
     const data = btoa(content);
+
     fetch("https://execjs.emilfolino.se/code", {
       method: "POST",
       headers: {

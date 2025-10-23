@@ -8,11 +8,10 @@ function FetchData() {
    const [data, setData] = useState([]);
 
     useEffect(() => {
-    fetch(FETCH_URL)
+    fetch("http://localhost:8080")
     .then(response => response.json())
     .then(data => {
         setData(data);
-        console.log("Fetched data:", data);
     });
     }, []);
 
@@ -31,6 +30,7 @@ function FetchData() {
               <td>{post.title}</td>
               <td>
                 <Link to={`/update/${post._id}`}>Update</Link>
+                <Link to={`/socketio/${post._id}`}>Socket</Link>
                 <Link to={`/texteditor/${post._id}`}>CodeMirror</Link>
               </td>
             </tr>
