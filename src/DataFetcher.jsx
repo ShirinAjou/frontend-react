@@ -32,8 +32,6 @@ function FetchData() {
               <td>
                 <Link to={`/update/${post._id}`}>Update</Link>
                 <Link to={`/texteditor/${post._id}`}>CodeMirror</Link>
-                {/* <a href={`/frontend-react/update/${post._id}`}>Update</a>
-                <a href={`/frontend-react/texteditor/${post._id}`}>CodeMirror</a> */}
               </td>
             </tr>
           ))}
