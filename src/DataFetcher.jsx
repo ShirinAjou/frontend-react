@@ -20,7 +20,7 @@ function FetchData() {
       <table className="table-container" border="1">
         <thead>
           <tr>
-            <th>Titel</th>
+            <th>Title</th>
             <th>Action</th>
           </tr>
         </thead>

@@ -26,8 +26,8 @@ test('updates title and content inputs', () => {
     </MemoryRouter>
   );
 
-  const titleInput = screen.getByLabelText(/titel/i);
-  const contentInput = screen.getByLabelText(/innehåll/i);
+  const titleInput = screen.getByLabelText(/title/i);
+  const contentInput = screen.getByLabelText(/content/i);
 
   fireEvent.change(titleInput, { target: { value: 'New Title' } });
   fireEvent.change(contentInput, { target: { value: 'New Content' } });
@@ -43,7 +43,7 @@ test('submits the form with input value', () => {
     </MemoryRouter>
   );
 
-  fireEvent.change(screen.getByLabelText("Titel"), { target: { value: "Testar titel-input" } });
+  fireEvent.change(screen.getByLabelText("Title"), { target: { value: "Testar titel-input" } });
 
   const form = screen.getByTestId('add-form');
   fireEvent.submit(form);
@@ -56,8 +56,8 @@ test('submit the form an navigate to homepage', () => {
     </MemoryRouter>
   );
 
-  const titleInput = screen.getByLabelText(/titel/i);
-  const contentInput = screen.getByLabelText(/innehåll/i);
+  const titleInput = screen.getByLabelText(/title/i);
+  const contentInput = screen.getByLabelText(/content/i);
 
   fireEvent.change(titleInput, { target: { value: 'New Title' } });
   fireEvent.change(contentInput, { target: { value: 'New Content' } });

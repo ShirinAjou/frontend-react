@@ -20,8 +20,8 @@ test('Testing table headers', async () => {
     render(<FetchData />);
   });
 
-  const titleHeader = screen.getByText('Titel');
-  const actionHeader = screen.getByText('Åtgärd');
+  const titleHeader = screen.getByText('Title');
+  const actionHeader = screen.getByText('Action');
 
   expect(titleHeader).toBeInTheDocument();
   expect(actionHeader).toBeInTheDocument();
