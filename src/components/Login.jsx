@@ -12,7 +12,7 @@ function Login() {
   } = useForm();
 
   const onSubmit = (data) => {
-    fetch(`http://localhost:8080/texteditor/login`, {
+    fetch(`http://localhost:8080/login`, {
       method: "POST",
       body: JSON.stringify({ email: data.email, password: data.password }),
       headers: { "Content-Type": "application/json" },
