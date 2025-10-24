@@ -11,7 +11,7 @@ function Register() {
     } = useForm();
 
     const onSubmit = (data) => {
-        fetch(`http://localhost:8080/register`, {
+        fetch(`${FETCH_URL}/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
