@@ -29,8 +29,9 @@ function Edit() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, content }),
   })
-    .then((res) => res.json())
-    .then(() => {
+    .then((res) => {res.json(); console.log(res.json)})
+    .then((data) => {
+      console.log(data)
       navigate("/");
     });
   };
