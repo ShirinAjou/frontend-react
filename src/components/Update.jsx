@@ -18,12 +18,9 @@ function Edit() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data)
-      setTitle(data.title);
-      setContent(data.content)});
+      setTitle(data.title || "");
+      setContent(data.content || "")});
     }, [id]);
-
-  const onChange = (event) => { setTitle(event.target.value) };
-  const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
   console.log('kom till fetch')
@@ -31,13 +28,9 @@ function Edit() {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, content }),
-    
   })
     .then((res) => res.json())
     .then(() => {
-
-      setTitle("");
-      setContent("");
       navigate("/");
     });
   };
@@ -47,10 +40,10 @@ function Edit() {
       <h1>Edit document</h1>
       <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Title</label>
-        <input type="text" name="title" value={title} onChange={onChange} required />
+        <input type="text" name="title" value={title} onChange={e => setTitle(e.target.value)} required />
 
         <label htmlFor="content">Content</label>
-        <textarea name="content" value={content} onChange={onContentChange}></textarea>
+        <textarea name="content" value={content} onChange={e => setContent(e.target.value)}></textarea>
 
         <input type="submit" value="Update document"/>
       </form>

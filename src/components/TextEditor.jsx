@@ -23,8 +23,7 @@ function TextEditor() {
     });
   }, [id]);
 
-  function clear(e) {
-    e.preventDefault();
+  function clear() {
     setTitle("");
     setContent("");
   }
@@ -88,7 +87,8 @@ function TextEditor() {
 
   return (
     <>
-      <div className='document-container'> 
+      <div className='document-container'>
+        <h1>CodeMirror</h1>
         <label htmlFor="title-field">Title</label>
         <input type="text" id="title-field" name="title-field" value={title} 
         onChange={(e) => setTitle(e.target.value)} />

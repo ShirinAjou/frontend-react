@@ -26,7 +26,7 @@ function SocketIo() {
     });
 
     socket.current.on("doc", (data) => {
-      setContent(data.content, false);
+      setContent(data.content);
     });
     
     socket.current.on("content", (data) => {
@@ -38,8 +38,8 @@ function SocketIo() {
     }
   }, [id]);
 
-  function clear(e) {
-    e.preventDefault();
+  function clear() {
+    setTitle("");
     setContent("");
   }
 
@@ -58,8 +58,6 @@ function SocketIo() {
     })
     .then((res) => res.json())
     .then(() => {
-      setTitle("");
-      setContent("");
       navigate("/");
     })
   };
@@ -67,9 +65,10 @@ function SocketIo() {
   return (
     <>
       <div className='document-container'> 
+        <h1>Live editor</h1>
         <form className="form-container" onSubmit={onSubmit}>
           <label htmlFor="title-field">Title</label>
-          <input type="text" id="title-field" name="title-field" value={title} onChange={(e) => setTitle(e.target.value)}/>
+          <input type="text" id="title-field" name="title-field" value={title} onChange={(e) => setTitle(e.target.value)} required/>
 
           <label htmlFor="content-field">Content</label>
           <textarea id="content-field" value={content} onChange={handleContentChange} ></textarea>
