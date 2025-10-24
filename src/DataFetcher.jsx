@@ -8,7 +8,7 @@ function FetchData() {
    const [data, setData] = useState([]);
 
     useEffect(() => {
-    fetch("http://localhost:8080")
+    fetch(FETCH_URL)
     .then(response => response.json())
     .then(data => {
         setData(data);

@@ -6,6 +6,7 @@
   "homepage": "https://ShirinAjou.github.io/frontend-react",
   "scripts": {
     "dev": "vite",
+    "start": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "lint --fix": "eslint . --fix",

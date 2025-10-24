@@ -17,6 +17,7 @@ function Edit() {
     })
     .then((res) => res.json())
     .then((data) => {
+      console.log(data)
       setTitle(data.title);
       setContent(data.content)});
     }, [id]);
@@ -25,13 +26,16 @@ function Edit() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
+  console.log('kom till fetch')
   fetch(`http://localhost:8080/update/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, content }),
+    
   })
     .then((res) => res.json())
     .then(() => {
+
       setTitle("");
       setContent("");
       navigate("/");
