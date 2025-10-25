@@ -12,8 +12,8 @@ function SocketIo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.current = io(`${FETCH_URL}`);
-    fetch(`${FETCH_URL}/texteditor/${id}`, {
+    socket.current = io("http://localhost:8080");
+    fetch(`http://localhost:8080/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -51,7 +51,7 @@ function SocketIo() {
 
    const onSubmit  = (event) => {
     event.preventDefault();
-    fetch(`${FETCH_URL}/update/${id}`, {
+    fetch(`http://localhost:8080/update/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ title, content }),
