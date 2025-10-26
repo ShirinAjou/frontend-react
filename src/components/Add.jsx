@@ -13,9 +13,15 @@ function Add() {
   const onContentChange = (event) => { setContent(event.target.value) };
 
   const onSubmit  = (event) => { event.preventDefault()
-  fetch(`${FETCH_URL}/add`, {
+  const token = localStorage.getItem("token"); 
+  const headers = { "Content-Type": "application/json" };
+  if (token) {
+    headers["x-access-token"] = token;
+  }
+
+  fetch("http://localhost:8080/add", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: headers,
     body: JSON.stringify({ title, content }),
   })
     .then((res) => res.json())

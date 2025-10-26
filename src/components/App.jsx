@@ -6,7 +6,8 @@ import TextEditor from'./TextEditor.jsx'
 import SocketIo from'./SocketIo.jsx'
 import Login from'./Login.jsx'
 import Register from'./Register.jsx'
-import React from 'react';
+import Signout from'./Signout.jsx'
+import React, { useState, useEffect } from 'react';
 import '../App.css'
 
 function Home() {
@@ -19,13 +20,23 @@ function Home() {
 }
 
 function App() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+  const savedToken = localStorage.getItem("token");
+  if (savedToken) {
+    setToken(savedToken);
+  }
+}, []);
+
   return (
     <>
       <nav className='nav-container'>
         <Link to="/">Home</Link> |{" "}
-        <Link to="/add">Add</Link> |{" "}
-        <Link to="/login">Login</Link> |{" "}
-        <Link to="/register">Register</Link>
+        <Link to="/add">Add</Link> {!token && " | "} {token && " | "}
+        {!token && <Link to="/login">Log in</Link>} {!token && " | "}
+        {!token && <Link to="/register">Register</Link>}
+        {token && <Link to="/signout">Sign out</Link>} 
       </nav>
 
       <Routes>
@@ -34,8 +45,9 @@ function App() {
         <Route path="/update/:id" element={<Edit />} />
         <Route path="/texteditor/:id" element={<TextEditor />} />
         <Route path="/socketio/:id" element={<SocketIo />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/signout" element={<Signout setToken={setToken} />} />     
       </Routes>
     </>
   );

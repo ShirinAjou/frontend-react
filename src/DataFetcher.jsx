@@ -7,13 +7,19 @@ import './App.css'
 function FetchData() {
    const [data, setData] = useState([]);
 
-    useEffect(() => {
-    fetch(FETCH_URL)
+useEffect(() => {
+  const token = localStorage.getItem("token");
+  const headers = { "Content-Type": "application/json" };
+  if (token) {
+    headers["x-access-token"] = token;
+  }
+
+  fetch("http://localhost:8080/", {
+    headers
+  })
     .then(response => response.json())
-    .then(data => {
-        setData(data);
-    });
-    }, []);
+    .then(data => setData(Array.isArray(data) ? data : []));
+  }, []);
 
     return (
     <div>

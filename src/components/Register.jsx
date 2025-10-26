@@ -11,7 +11,7 @@ function Register() {
     } = useForm();
 
     const onSubmit = (data) => {
-        fetch(`${FETCH_URL}/register`, {
+        fetch("http://localhost:8080/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -22,9 +22,9 @@ function Register() {
     })
       .then((res) => res.json())
       .then((resData) => {
-        if (resData.token) {
-          localStorage.setItem("token", resData.token);
-          console.log(data.name + " has been successfully registered");
+        if (resData.data?.token) {
+            localStorage.setItem("token", resData.data.token);
+            console.log(data.name + " has been successfully registered");
         } else {
           console.log(resData);
         }

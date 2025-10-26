@@ -12,7 +12,7 @@ function TextEditor() {
   const [output, setOutput] = useState("");
 
   useEffect(() => {
-    fetch(`${FETCH_URL}/texteditor/${id}`, {
+    fetch(`http://localhost:8080/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
@@ -38,7 +38,7 @@ function TextEditor() {
   }
 
   function saveData() {
-    fetch(`${FETCH_URL}/update/${id}`, {
+    fetch(`http://localhost:8080/update/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

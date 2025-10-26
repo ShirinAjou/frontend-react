@@ -4,8 +4,7 @@ import { useNavigate } from "react-router";
 import FETCH_URL from '../utils.js';
 import "../App.css";
 
-function Login() {
-  const [token, setToken] = useState(null);
+function Login({ setToken }) {
   const {
     register,
     handleSubmit,
@@ -14,7 +13,7 @@ function Login() {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    fetch(`${FETCH_URL}/login`, {
+    fetch("http://localhost:8080/login", {
       method: "POST",
       body: JSON.stringify({ email: data.email, password: data.password }),
       headers: { "Content-Type": "application/json" },
@@ -25,7 +24,6 @@ function Login() {
         localStorage.setItem("token", data.data.token);
         setToken(data.data.token);
         navigate("/");
-        console.log("You Are Successfully Logged In");
       } else {
         console.log("Email or Password is not matching with our record");
       }
