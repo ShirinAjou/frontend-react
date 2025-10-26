@@ -6,12 +6,17 @@ import './App.css'
 
 function FetchData() {
    const [data, setData] = useState([]);
+   const [token, setToken] = useState(null);
 
 useEffect(() => {
-  const token = localStorage.getItem("token");
+  const savedToken = localStorage.getItem("token");
+  if (savedToken) {
+    setToken(savedToken);
+  }
+
   const headers = { "Content-Type": "application/json" };
-  if (token) {
-    headers["x-access-token"] = token;
+  if (savedToken) {
+    headers["x-access-token"] = savedToken;
   }
 
   fetch("http://localhost:8080/", {
@@ -38,6 +43,7 @@ useEffect(() => {
                 <Link to={`/update/${post._id}`}>Update</Link>
                 <Link to={`/socketio/${post._id}`}>Socket</Link>
                 <Link to={`/texteditor/${post._id}`}>CodeMirror</Link>
+                {token && <Link to={`/share/${post._id}`}>Share</Link>}
               </td>
             </tr>
           ))}

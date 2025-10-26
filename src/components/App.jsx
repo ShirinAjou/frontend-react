@@ -7,6 +7,7 @@ import SocketIo from'./SocketIo.jsx'
 import Login from'./Login.jsx'
 import Register from'./Register.jsx'
 import Signout from'./Signout.jsx'
+import ShareDoc from'./ShareDoc.jsx'
 import React, { useState, useEffect } from 'react';
 import '../App.css'
 
@@ -23,11 +24,11 @@ function App() {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-  const savedToken = localStorage.getItem("token");
-  if (savedToken) {
-    setToken(savedToken);
-  }
-}, []);
+    const savedToken = localStorage.getItem("token");
+    if (savedToken) {
+      setToken(savedToken);
+    }
+  }, []);
 
   return (
     <>
@@ -47,7 +48,8 @@ function App() {
         <Route path="/socketio/:id" element={<SocketIo />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/signout" element={<Signout setToken={setToken} />} />     
+        <Route path="/signout" element={<Signout setToken={setToken} />} />
+        <Route path="/share/:id" element={<ShareDoc />} />   
       </Routes>
     </>
   );

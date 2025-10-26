@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import FETCH_URL from '../utils.js';
 import "../App.css";
 
@@ -9,7 +10,12 @@ function Register() {
         handleSubmit,
         formState: { errors },
     } = useForm();
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        localStorage.removeItem("token");
+    }, []);
+    
     const onSubmit = (data) => {
         fetch("http://localhost:8080/register", {
         method: "POST",
@@ -20,15 +26,16 @@ function Register() {
             password: data.password,
         }),
     })
-      .then((res) => res.json())
-      .then((resData) => {
-        if (resData.data?.token) {
+    .then((res) => res.json())
+    .then((resData) => {
+        if (resData.data && resData.data.token) {
             localStorage.setItem("token", resData.data.token);
-            console.log(data.name + " has been successfully registered");
+            
         } else {
-          console.log(resData);
+        console.log(resData);
         }
-      })
+        navigate("/login");
+        })
     };
 
     return (

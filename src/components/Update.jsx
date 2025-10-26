@@ -23,8 +23,6 @@ function Edit() {
     }, [id]);
 
   const onSubmit  = (event) => { event.preventDefault()
-  console.log(title)
-  console.log(content)
   fetch(`http://localhost:8080/update/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },

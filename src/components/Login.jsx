@@ -20,7 +20,7 @@ function Login({ setToken }) {
     })
     .then((res) => res.json())
     .then((data) => {
-      if (data.data?.token) {
+      if (data.data && data.data.token) {
         localStorage.setItem("token", data.data.token);
         setToken(data.data.token);
         navigate("/");
