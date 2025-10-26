@@ -23,14 +23,16 @@ function Edit() {
     }, [id]);
 
   const onSubmit  = (event) => { event.preventDefault()
-  console.log('kom till fetch')
+  console.log(title)
+  console.log(content)
   fetch(`${FETCH_URL}/update/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ title, content }),
   })
     .then((res) => res.json())
-    .then(() => {
+    .then((data) => {
+      console.log('data' + data)
       navigate("/");
     });
   };
