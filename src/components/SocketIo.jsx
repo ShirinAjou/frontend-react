@@ -12,7 +12,7 @@ function SocketIo() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    socket.current = io(`${FETCH_URL}`);
+    socket.current = io(FETCH_URL);
     fetch(`${FETCH_URL}/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },

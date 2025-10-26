@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import FETCH_URL from '../utils.js';
 import "../App.css";
 
@@ -10,6 +11,7 @@ function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
 
   const onSubmit = (data) => {
     fetch(`${FETCH_URL}/login`, {
@@ -19,9 +21,10 @@ function Login() {
     })
     .then((res) => res.json())
     .then((data) => {
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        setToken(data.token);
+      if (data.data?.token) {
+        localStorage.setItem("token", data.data.token);
+        setToken(data.data.token);
+        navigate("/");
         console.log("You Are Successfully Logged In");
       } else {
         console.log("Email or Password is not matching with our record");
