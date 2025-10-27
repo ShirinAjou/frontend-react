@@ -19,7 +19,7 @@ function Add() {
     headers["x-access-token"] = token;
   }
 
-  fetch("http://localhost:8080/add", {
+  fetch(`${FETCH_URL}/add`, {
     method: "POST",
     headers: headers,
     body: JSON.stringify({ title, content }),

@@ -19,7 +19,7 @@ useEffect(() => {
     headers["x-access-token"] = savedToken;
   }
 
-  fetch("http://localhost:8080/", {
+  fetch(FETCH_URL, {
     headers
   })
     .then(response => response.json())
