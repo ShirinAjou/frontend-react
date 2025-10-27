@@ -23,7 +23,11 @@ useEffect(() => {
     headers
   })
     .then(response => response.json())
-    .then(data => setData(Array.isArray(data) ? data : []));
+    .then(data => {if (Array.isArray(data)) {
+      setData(data)
+    } else {
+      setData([])}
+    });
   }, []);
 
     return (
