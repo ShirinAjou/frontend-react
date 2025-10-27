@@ -34,7 +34,7 @@ function Add() {
   return (
     <div>
       <h1>Create document</h1>
-      <form className="form-container" onSubmit={onSubmit}>
+      <form className="form-container" onSubmit={onSubmit} data-testid="add-form">
         <label htmlFor="title">Title</label>
         <input id="title" className="action-content" type="text" name="title" value={title} onChange={onChange} required />
 
