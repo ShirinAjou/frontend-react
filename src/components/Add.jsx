@@ -19,7 +19,7 @@ function Add() {
     headers["x-access-token"] = token;
   }
 
-  fetch(`${FETCH_URL}/add`, {
+  fetch("http://localhost:8080/add", {
     method: "POST",
     headers: headers,
     body: JSON.stringify({ title, content }),
@@ -34,7 +34,7 @@ function Add() {
   return (
     <div>
       <h1>Create document</h1>
-      <form className="form-container" onSubmit={onSubmit} data-testid="add-form">
+      <form className="form-container" onSubmit={onSubmit}>
         <label htmlFor="title">Title</label>
         <input id="title" className="action-content" type="text" name="title" value={title} onChange={onChange} required />
 

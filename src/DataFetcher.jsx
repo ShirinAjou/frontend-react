@@ -19,18 +19,34 @@ useEffect(() => {
     headers["x-access-token"] = savedToken;
   }
 
-  fetch(FETCH_URL, {
-    headers
+  fetch("http://localhost:8080/graphql", {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      query: `
+        {
+          documents {
+            _id
+            title
+            content
+            email
+            sharedWith
+          }
+        }
+      `
+    })
   })
     .then(response => response.json())
-    .then(data => {if (Array.isArray(data)) {
-      setData(data)
-    } else {
-      setData([])}
+    .then(result => {
+      if (result.data && Array.isArray(result.data.documents)) {
+        setData(result.data.documents);
+      } else {
+        setData([]);
+      }
     });
   }, []);
 
-    return (
+  return (
     <div>
       <table className="table-container" border="1">
         <thead>
