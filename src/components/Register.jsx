@@ -43,13 +43,6 @@ function Register() {
             <h2>Registration Form</h2>
             <form className="App" onSubmit={handleSubmit(onSubmit)}>
                 <input
-                    type="text"
-                    {...register("name", { required: true })}
-                    placeholder="Name"
-                />
-                {errors.name && <span style={{ color: "red" }}>*Name* is mandatory</span>}
-
-                <input
                     type="email"
                     {...register("email", { required: true })}
                     placeholder="Email"
