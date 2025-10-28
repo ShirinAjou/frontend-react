@@ -11,7 +11,7 @@ function Edit() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`${FETCH_URL}/${id}`, {
+    fetch(`${FETCH_URL}update/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })

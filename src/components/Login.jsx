@@ -48,7 +48,7 @@ function Login({ setToken }) {
         />
         {errors.password && <span style={{ color: "red" }}>*Password* is mandatory</span>}
 
-        <input type="submit" style={{ backgroundColor: "#a1eafb" }} />
+        <input type="submit"/>
       </form>
     </>
   );
