@@ -13,7 +13,7 @@ function Login({ setToken }) {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
-    fetch("http://localhost:8080/login", {
+    fetch(`${FETCH_URL}/login`, {
       method: "POST",
       body: JSON.stringify({ email: data.email, password: data.password }),
       headers: { "Content-Type": "application/json" },

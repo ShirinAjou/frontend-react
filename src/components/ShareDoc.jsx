@@ -17,7 +17,7 @@ function ShareDoc() {
         if (token) {
             headers["x-access-token"] = token;
         }
-        fetch(`http://localhost:8080/share/${id}`, {
+        fetch(`${FETCH_URL}/share/${id}`, {
             method: "POST",
             headers: headers,
             body: JSON.stringify({ email }),

@@ -19,7 +19,7 @@ useEffect(() => {
     headers["x-access-token"] = savedToken;
   }
 
-  fetch("http://localhost:8080/graphql", {
+  fetch(`${FETCH_URL}/graphql`, {
     method: "POST",
     headers,
     body: JSON.stringify({
