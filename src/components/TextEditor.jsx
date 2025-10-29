@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from "react-router";
 import FETCH_URL from '../utils.js';
 import CodeMirror from '@uiw/react-codemirror';
+import { io } from "socket.io-client";
 import '../App.css'
 
 function TextEditor() {
@@ -10,9 +11,11 @@ function TextEditor() {
   const [ content, setContent] = useState("");
   const [isCodeMode, setIsCodeMode] = useState(false);
   const [output, setOutput] = useState("");
+  const socket = useRef(null);
 
   useEffect(() => {
     socket.current = io(`${FETCH_URL}`);
+  
     fetch(`${FETCH_URL}/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -24,6 +27,15 @@ function TextEditor() {
       socket.current.emit("create", data._id);
       socket.current.emit("doc", data);
     });
+
+    socket.current.on("doc", (data) => {
+      setContent(data.content);
+    });
+    
+    socket.current.on("content", (data) => {
+      setContent(data);
+    });
+
     return () => {
       socket.current.disconnect();
     }
@@ -37,10 +49,12 @@ function TextEditor() {
   function handleContentChange(e) {
     const value = e.target.value;
     setContent(value);
+    socket.current.emit("content", value); 
   }
 
   function handleContentChangeMirror(value) {
     setContent(value);
+    socket.current.emit("content", value);
   }
 
   function saveData() {
