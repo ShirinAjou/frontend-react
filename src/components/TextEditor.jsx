@@ -32,8 +32,12 @@ function TextEditor() {
       setContent(data.content);
     });
     
-    socket.current.on("content", (data) => {
-      setContent(data);
+    socket.current.on("content", (data) => {   
+      if (typeof data.content === "string") {
+        setContent(data.content);
+      } else {
+        console.warn("Felaktig content-data:", data);
+      }
     });
 
     return () => {
