@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
-import FETCH_URL from '../utils.js';
 import "../App.css";
 
 function Signout({ setToken }) {

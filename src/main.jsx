@@ -11,11 +11,3 @@ createRoot(document.getElementById('root')).render(
     </HashRouter>
   </StrictMode>
 );
-
-// createRoot(document.getElementById('root')).render(
-//   <StrictMode>
-//     <HashRouter basename="/frontend-react">
-//       <App />
-//     </HashRouter>
-//   </StrictMode>
-// );
