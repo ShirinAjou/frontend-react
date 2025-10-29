@@ -12,15 +12,21 @@ function TextEditor() {
   const [output, setOutput] = useState("");
 
   useEffect(() => {
+    socket.current = io(`${FETCH_URL}`);
     fetch(`${FETCH_URL}/texteditor/${id}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
     .then((res) => res.json())
     .then((data) => {
-      setTitle(data.title);
-      setContent(data.content);
+      setTitle(data.title || "");
+      setContent(data.content || "");
+      socket.current.emit("create", data._id);
+      socket.current.emit("doc", data);
     });
+    return () => {
+      socket.current.disconnect();
+    }
   }, [id]);
 
   function clear() {
