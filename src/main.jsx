@@ -6,7 +6,7 @@ import App from './components/App.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HashRouter basename="https://shirinajou.github.io/frontend-react">
+    <HashRouter basename="/frontend-react">
       <App />
     </HashRouter>
   </StrictMode>
