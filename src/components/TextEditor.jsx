@@ -49,12 +49,12 @@ function TextEditor() {
   function handleContentChange(e) {
     const value = e.target.value;
     setContent(value);
-    socket.current.emit("content", value); 
+    socket.current.emit("content", { room: id, content: value });
   }
 
   function handleContentChangeMirror(value) {
     setContent(value);
-    socket.current.emit("content", value);
+    socket.current.emit("content", { room: id, content: value });
   }
 
   function saveData() {
