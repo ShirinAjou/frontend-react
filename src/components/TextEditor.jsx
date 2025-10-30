@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import FETCH_URL from '../utils.js';
 import CodeMirror from '@uiw/react-codemirror';
 import { io } from "socket.io-client";
@@ -12,7 +12,8 @@ function TextEditor() {
   const [isCodeMode, setIsCodeMode] = useState(false);
   const [output, setOutput] = useState("");
   const socket = useRef(null);
-
+  const navigate = useNavigate();
+  
   useEffect(() => {
     socket.current = io(`${FETCH_URL}`);
   
@@ -25,19 +26,15 @@ function TextEditor() {
       setTitle(data.title || "");
       setContent(data.content || "");
       socket.current.emit("create", data._id);
-      socket.current.emit("doc", data);
+      socket.current.emit("doc", { _id: data._id, content: data.content });
     });
 
     socket.current.on("doc", (data) => {
       setContent(data.content);
     });
     
-    socket.current.on("content", (data) => {   
-      if (typeof data.content === "string") {
-        setContent(data.content);
-      } else {
-        console.warn("Felaktig content-data:", data);
-      }
+    socket.current.on("content", (data) => {
+      setContent(data.content);
     });
 
     return () => {
@@ -50,31 +47,27 @@ function TextEditor() {
     setContent("");
   }
 
-  function handleContentChange(e) {
-    const value = e.target.value;
-    setContent(value);
-    socket.current.emit("content", { room: id, content: value });
+  function handleContentChangeMirror(value) {
+      setContent(value);
+      socket.current.emit("content", { room: id, content: value });
   }
 
-  function handleContentChangeMirror(value) {
-    setContent(value);
-    socket.current.emit("content", { room: id, content: value });
+  function handleContentChange(e) {
+      const value = e.target.value;
+      setContent(value);
+      socket.current.emit("content", { room: id, content: value });
   }
 
   function saveData() {
     fetch(`${FETCH_URL}/update/${id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        title,
-        content
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title, content, type: isCodeMode ? "code" : "text" })
     })
     .then(res => res.json())
     .then(result => {
       console.log("Dokument sparat:", result);
+      navigate("/");
     })
     .catch(err => {
       console.error("Fel vid sparning:", err);
@@ -86,12 +79,8 @@ function TextEditor() {
 
     fetch("https://execjs.emilfolino.se/code", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        code: data
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ code: data })
     })
     .then(res => {
       if (!res.ok) {
