@@ -30,7 +30,7 @@ function SocketIo() {
     });
     
     socket.current.on("content", (data) => {
-      setContent(data);
+      setContent(data.content);
     });
 
     return () => {
@@ -45,8 +45,8 @@ function SocketIo() {
 
   function handleContentChange(e) {
     const value = e.target.value;
-    setContent(value)
-    socket.current.emit("content", value);
+    setContent(value);
+    socket.current.emit("content", { room: id, content: value });
   }
 
    const onSubmit  = (event) => {
